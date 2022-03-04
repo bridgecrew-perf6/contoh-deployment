@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Predict Price</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+</head>
+<body>
+    <div class="container py-4">
+        <header class="pb-3 mb-4 border-bottom">
+            <a href="{{ url_for('home') }}" class="d-flex align-items-center text-dark text-decoration-none">
+            <span class="fs-4">BMW Price Recommendation</span>
+            </a>
+        </header>
+        <div class="col-3">
+            <p><b>Enter your car's specification</b></p>
+            <form method="POST" action="{{  url_for('result') }}">
+                <p>Model</p>
+                <select class="form-control" name="bmw_model">
+                    {% for car_model in spec['model'] %}
+                        <option value="{{ car_model }}">{{ car_model }}</option>
+                    {% endfor %}
+                </select>
+                <br>
+                <p>Registration Year</p>
+                <select class="form-control" name="year">
+                    {% for year in spec['year'] %}
+                        <option value="{{ year }}">{{ year }}</option>
+                    {% endfor %}
+                </select>
+                <br>
+                <p>Transmission</p>
+                <select class="form-control" name="transmission">
+                    {% for transmission in spec['transmission'] %}
+                        <option value="{{ transmission }}">{{ transmission }}</option>
+                    {% endfor %}
+                </select>
+                <br>
+                <p>Fuel Type</p>
+                <select class="form-control" name="fuel_type">
+                    {% for fuel_type in spec['fuel_type'] %}
+                        <option value="{{ fuel_type }}">{{ fuel_type }}</option>
+                    {% endfor %}
+                </select>
+                <br>
+                <p>Engine Size</p>
+                <select class="form-control" name="engine_size">
+                    {% for engine_size in spec['engine_size'] %}
+                        <option value="{{ engine_size}}">{{ engine_size}}</option>
+                    {% endfor %}
+                </select>
+                <br>
+                <p>Mileage</p>
+                <input class="form-control" name="mileage" type="number" placeholder="in miles" required></input>
+                <br>
+                <p>Fuel Efficiency</p>
+                <input class="form-control" name="mpg" type="number" placeholder="miles per gallon" required></input>
+                <br>
+                <p>Tax</p>
+                <input class="form-control" name="tax" type="number" required></input>
+                <br>
+                <input type="submit" class="btn btn-info" value="Predict"></input>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
